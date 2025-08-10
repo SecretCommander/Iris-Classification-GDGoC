@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+    <title>IRIS Model Classification</title>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container-fluid justify-content-center">
+            <a href="" class="navbar-brand m-0"> Iris Classification Model </a>
+        </div>
+    </nav>
+    <!-- DOCUMENTATION -->
+    <section class="py-1" id="doc">
+        <div class="container">
+            <h1 class="my-4">Documentation</h1>
+            <div class="row g-4 mb-3">
+                <div class="col-sm-6 col-12">
+                    <p>
+                        This web application uses a machine learning model to classify
+                        iris flowers based on their features:
+                    </p>
+                    <ul class="list-group list-group-flush mb-3 shadow-sm">
+                        <li class="list-group-item">🌿 Sepal Length (cm)</li>
+                        <li class="list-group-item">🌿 Sepal Width (cm)</li>
+                        <li class="list-group-item">🌿 Petal Length (cm)</li>
+                        <li class="list-group-item">🌿 Petal Width (cm)</li>
+                    </ul>
+                </div>
+                <!-- TYPE OF IRIS -->
+                <div class="col-12 col-sm-6">
+                    <h3 class="text-center mb-3">
+                        3 Types of Iris Flowers in the model
+                    </h3>
+                    <div id="iris-images" class="d-flex flex-wrap justify-content-evenly gy-3">
+                        <div>
+                            <img src="setosa.jpg" alt="Iris Setosa" class="img-fluid rounded shadow" width="150" />
+                            <p class="mt-2 text-center">Iris Setosa</p>
+                        </div>
+                        <div>
+                            <img src="versicolor.jpg" alt="Iris Versicolor" class="img-fluid rounded shadow"
+                                width="150" />
+                            <p class="mt-2 text-center">Iris Versicolor</p>
+                        </div>
+                        <div>
+                            <img src="virginica.jpg" alt="Iris Virginica" class="img-fluid rounded shadow"
+                                width="150" />
+                            <p class="mt-2 text-center">Iris Virginica</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- HOW TO USE -->
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="my-4 text-center">How to Use</h1>
+                    <p class="text-center">
+                        Enter the measurements of the iris flower in the form below and
+                        click "Classify" to get the predicted species.
+                    </p>
+                    <p class="text-center">
+                        The model will classify the iris flower into one of three species
+                        above.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FORM -->
+    <section class="py-5">
+        <div class="container">
+            <div class="col-md-6 offset-md-3">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-4">
+                        <h4 class="text-center mb-4 fw-bold">Classify Your Iris</h4>
+                        <form id="iris-form">
+                            <div class="mb-3">
+                                <label for="sepal-length" class="form-label">Sepal Length (cm)</label>
+                                <input type="number" step="0.01" id="sepal-length" class="form-control" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="sepal-width" class="form-label">Sepal Width (cm)</label>
+                                <input type="number" step="0.01" id="sepal-width" class="form-control" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="petal-length" class="form-label">Petal Length (cm)</label>
+                                <input type="number" step="0.01" id="petal-length" class="form-control" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="petal-width" class="form-label">Petal Width (cm)</label>
+                                <input type="number" step="0.01" id="petal-width" class="form-control" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                Classify
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container text-center py-2 ">
+            <p class="mb-0">
+                &copy; 2025 Iris Classification Model. All rights reserved.
+            </p>
+            <p class="mb-0 fw-normal"> Made by Farrel Ganteng</p>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow-lg">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="resultModalLabel">Classification Result</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="iris.png" alt="Iris Flower" class="img-fluid mb-3 mx-auto" width="200" id="iris-image-result" />
+                    <h3 id="species-result" class="fw-bold"></h3>
+                    <p class="text-muted">Based on the input features, the model predicts this species.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("iris-form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const sepalLength = parseFloat(document.getElementById("sepal-length").value);
+            const sepalWidth = parseFloat(document.getElementById("sepal-width").value);
+            const petalLength = parseFloat(document.getElementById("petal-length").value);
+            const petalWidth = parseFloat(document.getElementById("petal-width").value);
+
+            // Validation: if any input has more than 3 digits before decimal
+            const values = [sepalLength, sepalWidth, petalLength, petalWidth];
+            for (let val of values) {
+                if (!/^\d{1,4}(\.\d+)?$/.test(val)) {
+                    alert("Please enter a valid number with at most 4 digits before the decimal point.");
+                    return;
+                }
+            }
+
+            try {
+                // Send request to FastAPI backend
+                const response = await fetch("http://127.0.0.1:8000/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        SepalLengthCm: sepalLength,
+                        SepalWidthCm: sepalWidth,
+                        PetalLengthCm: petalLength,
+                        PetalWidthCm: petalWidth
+                    })
+                });
+
+                const result = await response.json();
+                if (result.prediction) {
+                    document.getElementById("species-result").textContent = result.prediction;
+                    let imageSrc = "";
+                    switch (result.prediction) {
+                        case "Iris-setosa":
+                            imageSrc = "setosa.jpg";
+                            break;
+                        case "Iris-versicolor":
+                            imageSrc = "versicolor.jpg";
+                            break;
+                        case "Iris-virginica":
+                            imageSrc = "virginica.jpg";
+                            break;
+                        default:
+                            imageSrc = "iris.png"; // fallback image
+                    }
+                    document.getElementById("iris-image-result").src = imageSrc;
+                } else if (result.error) {
+                    document.getElementById("species-result").textContent = "Error: " + result.error;
+                } else {
+                    document.getElementById("species-result").textContent = "Unknown response";
+                }
+
+
+                const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+                resultModal.show();
+
+            } catch (error) {
+                console.error("Error fetching prediction:", error);
+                document.getElementById("species-result").textContent = "Connection error to model";
+                const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+                resultModal.show();
+            }
+        });
+    </script>
+</body>
+
+</html>

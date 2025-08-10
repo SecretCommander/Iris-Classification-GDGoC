@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5 !important;
+}
+.navbar, footer {
+    background-color: #34699A !important;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+.navbar a {
+    font-size: 1.45rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: #ddd;
+}
+
+#iris-images img, #iris-image-result {
+    width: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.list-group-item {
+    background-color: #ffffff56 !important;
+}
